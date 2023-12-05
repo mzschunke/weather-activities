@@ -13,7 +13,7 @@ export default function SearchForm({ onAddActivity }) {
       <h2>Add new Activity:</h2>
       <form data-js="form" onSubmit={handleSubmit} className={style["form"]}>
         <label htmlFor="name">Name:</label>
-        <input name="name"></input>
+        <input name="name" required></input>
         <div>
           <label htmlFor="checkbox">Good-weather activity:</label>
           <input type="checkbox" name="checkbox"></input>
