@@ -8,7 +8,7 @@ function App() {
   const [weather, setWeather] = useState([]);
   async function fetchData() {
     const response = await fetch(
-      "https://example-apis.vercel.app/api/weather/europe"
+      "https://example-apis.vercel.app/api/weather/arctic"
     );
     const data = await response.json();
     setWeather(data);
@@ -21,22 +21,28 @@ function App() {
     defaultValue: [],
   });
 
-  useEffect(() => {
-    console.log("weather", weather);
-  }, [weather]);
-
   function handleAddActivity(newActivity) {
     const activityID = { ...newActivity, id: uid() };
     setActivities((prevActivities) => [...prevActivities, activityID]);
   }
 
+  function handleDeleteActivity(id) {
+    setActivities((prevActivities) =>
+      prevActivities.filter((activity) => activity.id !== id)
+    );
+  }
+
   return (
     <>
       <div>
-        <p>Weather Activities App</p>
+        <h1>Weather Activities App</h1>
       </div>
+      <List
+        activities={activities}
+        weather={weather}
+        onDeleteActivity={handleDeleteActivity}
+      />
       <SearchForm onAddActivity={handleAddActivity} />
-      <List activities={activities} weather={weather} />
     </>
   );
 }
