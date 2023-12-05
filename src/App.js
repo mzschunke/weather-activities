@@ -6,20 +6,31 @@ import List from "./components/List";
 
 function App() {
   const [weather, setWeather] = useState([]);
-  async function fetchData() {
-    const response = await fetch(
-      "https://example-apis.vercel.app/api/weather/arctic"
-    );
-    const data = await response.json();
-    setWeather(data);
-  }
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          "https://example-apis.vercel.app/api/weather/europe"
+        );
+        const data = await response.json();
+        setWeather(data);
+        console.log("Weather updated:", data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
     fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+    return () => clearInterval(intervalId);
   }, []);
 
-  const [activities, setActivities] = useLocalStorageState("activities", {
-    defaultValue: [],
-  });
+  const [activities, setActivities] = useLocalStorageState(
+    "activities",
+    {
+      defaultValue: [],
+    },
+    []
+  );
 
   function handleAddActivity(newActivity) {
     const activityID = { ...newActivity, id: uid() };

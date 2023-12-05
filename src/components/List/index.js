@@ -15,7 +15,12 @@ export default function List({ activities, weather, onDeleteActivity }) {
             {goodWeatherActivities.map((activity) => (
               <li key={activity.id} className={styles["item"]}>
                 {activity.name} 👍
-                <button>Delete </button>
+                <button
+                  onClick={() => onDeleteActivity(activity.id)}
+                  className={styles["button"]}
+                >
+                  Delete{" "}
+                </button>
               </li>
             ))}
           </ul>
