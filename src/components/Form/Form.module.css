@@ -5,3 +5,16 @@
   padding: 10px;
   gap: 10px;
 }
+
+.form-container {
+  display: flex;
+}
+
+.form {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.title {
+  margin-bottom: 5px;
+}
